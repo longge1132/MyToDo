@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .body {
+        background-color: #fff;
+      }
+      .btn {
+        display: inline-block;
+        padding: 4px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        border-color: #ccc;
+        box-shadow: inset 0 1px rgba(155, 155, 155, 0.2),
+          0 1px 2px rgba(155, 155, 155, 0.2);
+        border-radius: 5px;
+      }
+
+      .btn-danger {
+        color: #fff;
+        background-color: #da4f49;
+        border: 1px soild #bd362f;
+      }
+
+      .btn-danger:hover {
+        color: #fff;
+        background-color: #bd362f;
+      }
+
+      .btn:focus {
+        outline: none;
+      }
+
+      .container {
+        width: 600px;
+        /* height: 400px; */
+        margin: 0 auto;
+        background-color: antiquewhite;
+      }
+
+      .todo-wrap {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      /* header的样式 */
+      .todo-header > input {
+        margin: 20px 10px;
+        width: 560px;
+        height: 34px;
+        line-height: 34px;
+        font-size: 16px;
+        border: 2px solid #eee;
+        outline: none;
+        box-sizing: border-box;
+      }
+      .todo-header > input:focus {
+        border-color: rgba(82, 168, 255, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+          0 0 8px rgba(82, 168, 255, 0.6);
+      }
+      /* list的样式 */
+      .todo-list {
+        margin-left: 0;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        padding: 0;
+      }
+
+      .to-empty {
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        padding-left: 5px;
+        margin-top: 5px;
+      }
+
+      li {
+        list-style: none;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 5px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      li label {
+        float: left;
+        cursor: pointer;
+      }
+
+      li label input {
+        vertical-align: middle;
+        margin-right: 6px;
+        position: relative;
+        top: -1px;
+        cursor: pointer;
+      }
+
+      li button {
+        float: right;
+        /* display: none; */
+      }
+
+      li::before {
+        content: initial;
+      }
+
+      li:last-child {
+        border-bottom: none;
+      }
+
+      /* footer 的样式*/
+      .todo-footer {
+        height: 40px;
+        line-height: 40px;
+        padding-left: 6px;
+        margin-top: 5px;
+      }
+
+      .todo-footer label {
+        display: inline-block;
+        margin-right: 20px;
+        cursor: pointer;
+      }
+      .todo-footer label input {
+        position: relative;
+        top: -1px;
+      }
+
+      .todo-footer button {
+        float: right;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="todo-wrap">
+        <div class="todo-header">
+          <input type="text" placeholder="请输入待办事件" />
+        </div>
+        <ul class="todo-list">
+          <li>
+            <label>
+              <input type="checkbox" />
+              <span>xxxx</span>
+            </label>
+            <button class="btn">删除</button>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              <span>xxxx</span>
+            </label>
+            <button class="btn">删除</button>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              <span>xxxx</span>
+            </label>
+            <button class="btn">删除</button>
+          </li>
+        </ul>
+        <div class="todo-footer">
+          <label>
+            <input type="checkbox" />
+          </label>
+          <span>
+            <span>已完成0</span>
+            / 全部2
+          </span>
+          <button class="btn btn-danger">清除已完成任务</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
