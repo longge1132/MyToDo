@@ -7,6 +7,12 @@
         <MyFooter :todos="todothings" ref="footer"></MyFooter>
       </div>
     </div>
+    <div v-show="deleteSure" class="dilog">
+      <UserMessage />
+    </div>
+    <div class="timeNow">
+      <span>Time：{{ nowtime }}</span>
+    </div>
   </div>
 </template>
 
@@ -14,6 +20,7 @@
 import MyHeader from './components/MyHeader.vue'
 import MyList from './components/MyList.vue'
 import MyFooter from './components/MyFooter.vue'
+import UserMessage from './components/dialog/UserMessage.vue'
 
 export default {
   name: 'App',
@@ -21,27 +28,33 @@ export default {
     MyHeader,
     MyList,
     MyFooter,
+    UserMessage,
   },
   data() {
     return {
       todothings: JSON.parse(localStorage.getItem('todos')) || [],
+      deleteSure: true,
+      nowtime: '',
     }
   },
   mounted() {
-    this.$refs.footer.$on('checkall', this.checkAll)
-    this.$refs.footer.$on('clearall', this.clearAllTodo)
+    this.$bus.$on('checkall', this.checkAll)
+    this.$bus.$on('clearall', this.clearAllTodo)
     this.$bus.$on('deleteTodo', this.deleteTodo)
     this.$bus.$on('checkTodo', this.checkTodo)
+    this.$bus.$on('changeTodoMark', this.changeTodo)
+    this.startTime()
   },
   beforeDestroy() {
-    this.$bus.$off(['deleteTodo', 'checkTodo'])
-    this.$off()
+    // this.$bus.$off(['deleteTodo', 'checkTodo'])
+    this.$bus.$off()
   },
   methods: {
     // 添加一个todo
     receiveTo(todo) {
       //将新的数据加入到数组中
       this.todothings.unshift(todo)
+      this.sortTodo()
     },
     //选择状态的改变
     checkTodo(id) {
@@ -57,8 +70,18 @@ export default {
         return todo.id !== id
       })
     },
+    //改变一个选项的标记
+    changeTodo(id, level) {
+      this.todothings.forEach((todo) => {
+        if (todo.id === id) {
+          todo.level = level
+        }
+      })
+      this.sortTodo()
+    },
     //全选or全不选
     checkAll(value) {
+      console.log('checkout :>> ')
       this.todothings.forEach((todo) => {
         todo.done = value ? true : false
       })
@@ -67,6 +90,31 @@ export default {
       this.todothings = this.todothings.filter((todo) => {
         return !todo.done
       })
+    },
+    checkTime(i) {
+      if (i < 10) {
+        i = '0' + i
+      }
+      return i
+    },
+    //按照重要程度排序
+    sortTodo() {
+      this.todothings.sort((a, b) => {
+        return parseInt(a.level) - parseInt(b.level)
+      })
+    },
+    //记录时间
+    startTime() {
+      let today = new Date()
+      let h = today.getHours()
+      let m = today.getMinutes()
+      let s = today.getSeconds() // 在小于10的数字钱前加一个‘0’
+      m = this.checkTime(m)
+      s = this.checkTime(s)
+      this.nowtime = h + ':' + m + ':' + s
+      setTimeout(() => {
+        this.startTime()
+      }, 500)
     },
   },
   watch: {
@@ -81,19 +129,29 @@ export default {
 </script>
 
 <style>
-.body {
-  background-color: #fff;
+body {
+  background-color: black;
+}
+
+#app {
+  width: 1200px;
+  height: 750px;
+  background-color: black;
+  background: url('./assets/beijing1.png') no-repeat 0 0 transparent;
+  background-size: 100% 100%;
+  margin: auto;
+  position: relative;
 }
 .btn {
   display: inline-block;
   padding: 4px 12px;
-  margin-bottom: 0;
+  margin-top: 2px;
   font-size: 14px;
   line-height: 20px;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  border-color: #ccc;
+  border-color: lightcoral;
   box-shadow: inset 0 1px rgba(155, 155, 155, 0.2),
     0 1px 2px rgba(155, 155, 155, 0.2);
   border-radius: 5px;
@@ -101,8 +159,8 @@ export default {
 
 .btn-danger {
   color: #fff;
-  background-color: #da4f49;
-  border: 1px soild #bd362f;
+  background-color: rgb(223, 85, 61);
+  border: 3px soild #bd362f;
 }
 
 .btn-danger:hover {
@@ -115,15 +173,37 @@ export default {
 }
 
 .container {
-  width: 600px;
-  /* height: 400px; */
-  margin: 0 auto;
-  background-color: #eee;
+  width: 550px;
+  height: 100%;
+  float: right;
+  /* margin: 0 auto; */
+  background-color: transparent;
+  border: 1px solid rgba(129, 177, 226, 0.2);
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .todo-wrap {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 2px solid rgba(131, 203, 228, 0.6);
   border-radius: 5px;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 }
+
+.timeNow {
+  /* background-color: aqua; */
+  font-size: 50px;
+  color: rgba(246, 249, 250, 0.6);
+  position: fixed;
+  top: 20px;
+  left: 30%;
+  transform: translateX(-50%);
+}
+/* 确认的消息框 */
+/* .dilog {
+  display: none;
+} */
 </style>

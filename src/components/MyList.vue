@@ -1,5 +1,6 @@
 <template>
   <ul class="todo-list">
+    <p v-show="!todothings.length">空空如也</p>
     <MyItems v-for="item in todothings" :key="item.id" :todo="item"></MyItems>
   </ul>
 </template>
@@ -19,17 +20,17 @@ export default {
 /* list的样式 */
 .todo-list {
   margin-left: 0;
-  border: 1px solid #ddd;
+  border: 1px solid rgb(169, 215, 245);
   border-radius: 2px;
   padding: 0;
+  height: 81%;
+  overflow: auto;
 }
 
-.to-empty {
-  height: 40px;
-  line-height: 40px;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-  padding-left: 5px;
-  margin-top: 2px;
+.todo-list p {
+  font-size: 30px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: whitesmoke;
 }
 </style>

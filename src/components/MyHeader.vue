@@ -21,10 +21,21 @@ export default {
   },
   methods: {
     addthing() {
-      if (this.thing.trim().length === 0) return alert('请输入！')
-      const todoObj = { id: nanoid(), thing: this.thing, done: false }
+      if (this.thing.trim().length === 0)
+        return this.inputTips('输入不能为空哦！')
+      if (this.thing.trim().length > 10)
+        return this.inputTips('输入不能超过10个字符！')
+      const todoObj = {
+        id: nanoid(),
+        thing: this.thing.trim(),
+        done: false,
+        level: 2,
+      }
       this.$emit('receiveTo', todoObj)
       this.thing = ''
+    },
+    inputTips(msg) {
+      this.$bus.$emit('openMsgs', null, 'tip', msg)
     },
   },
 }
@@ -32,13 +43,20 @@ export default {
 
 <style scoped>
 /* header的样式 */
+.todo-header {
+  width: 100%;
+  padding: 2 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #666;
+}
 .todo-header > input {
-  margin: 10px 10px;
-  width: 560px;
-  height: 34px;
+  margin: 10px 0;
+  width: 100%;
+  height: 40px;
   line-height: 34px;
   font-size: 16px;
   border: 2px solid #eee;
+  border-radius: 6px;
   outline: none;
   box-sizing: border-box;
 }

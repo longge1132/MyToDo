@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     cleartodo() {
-      this.$emit('clearall')
+      this.$bus.$emit('openMsgs', null, 'all', '确认删除全部已完成任务？？')
     },
   },
   computed: {
@@ -42,7 +42,8 @@ export default {
         //第一种是 父给子组件传递一个函数， 子组件在props中接收， 然后this调用来触发。
         // this.checkall(value)
         // 第二种是自定义事件， 父组件上用@checkall 或 v-on绑定，  子组件emit触发， 或者用$ref 。$on 来绑定
-        this.$emit('checkall', value)
+        console.log('value :>> ', value)
+        this.$bus.$emit('checkall', value)
       },
     },
   },
@@ -54,8 +55,9 @@ export default {
 .todo-footer {
   height: 40px;
   line-height: 40px;
-  padding-left: 6px;
-  margin-top: 5px;
+  /* position: absolute; */
+  width: 100%;
+  border-top: 2px solid #ddd;
 }
 
 .todo-footer label {
@@ -65,12 +67,12 @@ export default {
 }
 .todo-footer label input {
   position: relative;
-  top: -1px;
   cursor: pointer;
 }
 
 .todo-footer button {
   float: right;
   margin-top: 5px;
+  /* margin-right: 30px; */
 }
 </style>
