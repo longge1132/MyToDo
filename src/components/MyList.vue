@@ -1,7 +1,12 @@
 <template>
-  <ul class="todo-list">
+  <ul :class="mode">
     <p v-show="!todothings.length">空空如也</p>
-    <MyItems v-for="item in todothings" :key="item.id" :todo="item"></MyItems>
+    <MyItems
+      v-for="item in todothings"
+      :key="item.id"
+      :todo="item"
+      :mode="displayMode"
+    ></MyItems>
   </ul>
 </template>
 
@@ -11,8 +16,19 @@ import MyItems from './MyItems.vue'
 export default {
   name: 'MyList',
   components: { MyItems },
-  props: ['todothings'],
+  props: ['todothings', 'displayModes'],
+  data() {
+    return {}
+  },
   methods: {},
+  computed: {
+    displayMode() {
+      return this.displayModes ? 'list' : 'block'
+    },
+    mode() {
+      return this.displayMode === 'block' ? 'todo-list todo-list2' : 'todo-list'
+    },
+  },
 }
 </script>
 
@@ -25,6 +41,13 @@ export default {
   padding: 0;
   height: 81%;
   overflow: auto;
+}
+
+.todo-list2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
 }
 
 .todo-list p {

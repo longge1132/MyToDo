@@ -13,7 +13,7 @@
 import { nanoid } from 'nanoid'
 export default {
   name: 'MyHeader',
-  props: ['receiveTo'],
+  props: ['receiveTo', 'time'],
   data() {
     return {
       thing: '',
@@ -30,6 +30,8 @@ export default {
         thing: this.thing.trim(),
         done: false,
         level: 2,
+        time: this.time,
+        remark: '',
       }
       this.$emit('receiveTo', todoObj)
       this.thing = ''

@@ -42,7 +42,7 @@ export default {
         //第一种是 父给子组件传递一个函数， 子组件在props中接收， 然后this调用来触发。
         // this.checkall(value)
         // 第二种是自定义事件， 父组件上用@checkall 或 v-on绑定，  子组件emit触发， 或者用$ref 。$on 来绑定
-        console.log('value :>> ', value)
+        // console.log('value :>> ', value)
         this.$bus.$emit('checkall', value)
       },
     },

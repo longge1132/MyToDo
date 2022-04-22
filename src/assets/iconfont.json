@@ -1,0 +1,86 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1840117",
+      "name": "酷-1",
+      "font_class": "-cool-",
+      "unicode": "e6ea",
+      "unicode_decimal": 59114
+    },
+    {
+      "icon_id": "1840118",
+      "name": "头晕",
+      "font_class": "-dizzy",
+      "unicode": "e6eb",
+      "unicode_decimal": 59115
+    },
+    {
+      "icon_id": "1840125",
+      "name": "开心-2",
+      "font_class": "-happy-",
+      "unicode": "e6ec",
+      "unicode_decimal": 59116
+    },
+    {
+      "icon_id": "1840127",
+      "name": "受伤",
+      "font_class": "-injury",
+      "unicode": "e6ed",
+      "unicode_decimal": 59117
+    },
+    {
+      "icon_id": "4354253",
+      "name": "形状-图片",
+      "font_class": "xingzhuang-tupian",
+      "unicode": "eb98",
+      "unicode_decimal": 60312
+    },
+    {
+      "icon_id": "4583613",
+      "name": "空心对勾",
+      "font_class": "kongxinduigou",
+      "unicode": "ebe5",
+      "unicode_decimal": 60389
+    },
+    {
+      "icon_id": "4682882",
+      "name": "方块+",
+      "font_class": "fangkuai",
+      "unicode": "ec06",
+      "unicode_decimal": 60422
+    },
+    {
+      "icon_id": "4779612",
+      "name": "表单组件-表格",
+      "font_class": "biaodanzujian-biaoge",
+      "unicode": "ec15",
+      "unicode_decimal": 60437
+    },
+    {
+      "icon_id": "4893199",
+      "name": "未知格式",
+      "font_class": "weizhigeshi",
+      "unicode": "ec1a",
+      "unicode_decimal": 60442
+    },
+    {
+      "icon_id": "6380878",
+      "name": "点赞_块",
+      "font_class": "dianzan_kuai",
+      "unicode": "ec8c",
+      "unicode_decimal": 60556
+    },
+    {
+      "icon_id": "6775641",
+      "name": "爱心 _实心",
+      "font_class": "aixin_shixin",
+      "unicode": "eca1",
+      "unicode_decimal": 60577
+    }
+  ]
+}

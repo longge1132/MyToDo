@@ -2,7 +2,10 @@
   <div v-show="openMsg" @click="colseMsg2" class="message">
     <div v-show="openMsgDelete" class="modal-content">
       <span @click="colseMsg" class="close">&times;</span>
-      <p>{{ msg }}</p>
+      <p>
+        {{ msg }}
+        <span style="font-size: 20px; color: tomato;">{{ todotitle }}</span>
+      </p>
       <div class="btn-wrap">
         <button class="sureBtn" @click="colseMsg">取消</button>
         <button class="sureBtn" @click="deleteMsg">删除</button>
@@ -10,7 +13,11 @@
     </div>
     <div v-show="openMsgMark" style="height: 160px;" class="modal-content">
       <span @click="colseMsg" class="close">&times;</span>
-      <p style="font-size: 12px;">您认为这件事：</p>
+      <p style="font-size: 14px;">
+        您认为
+        <span style="font-size: 16px; color: tomato;">{{ todotitle }}</span>
+        这件事：
+      </p>
       <div class="choose-btn" @click="checkActive" ref="choosebtn">
         <button class="mark-btn choose1">必须完成！</button>
         <button class="mark-btn choose2">争取完成~</button>
@@ -34,6 +41,7 @@
 <script>
 export default {
   name: 'UserMessage',
+  props: ['todos'],
   data() {
     return {
       //控制弹出窗口的数据
@@ -50,6 +58,16 @@ export default {
   },
   mounted() {
     this.$bus.$on('openMsgs', this.openMsgs)
+  },
+  computed: {
+    todotitle() {
+      for (let todo of this.todos) {
+        if (todo.id === this.todoId) {
+          return todo.thing
+        }
+      }
+      return ''
+    },
   },
   methods: {
     //绑定事件， 打开弹框
@@ -151,7 +169,7 @@ export default {
 }
 
 .btn-wrap {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .sureBtn {
   float: right;
@@ -169,15 +187,15 @@ export default {
 }
 .mark-btn {
   height: 30px;
-  line-height: 30px;
+  /* line-height: 30px; */
   font-size: 16px;
   background-color: lightblue;
   border: 2px solid lightskyblue;
   text-align: center;
-  vertical-align: middle;
   color: white;
   border-radius: 3px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .choose1 {
@@ -205,7 +223,8 @@ export default {
 }
 
 .active {
-  border: 3px solid green;
+  border: 2px solid green;
   color: aliceblue;
+  box-shadow: 2px 2px 2px rgb(30, 184, 30), 2px 2px 2px rgb(30, 184, 30) inset;
 }
 </style>
